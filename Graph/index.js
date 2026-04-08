@@ -49,11 +49,11 @@ class Graph {
 
 
     removeVertex(vertex) {  // to remove a vertex we need to remove all the edges connected to that vertex and then remove the vertex itself from the adjacency list
-        if(!this.adjacencyList[vertex]){
+        if (!this.adjacencyList[vertex]) {
             return
         }
 
-        for(let adjacentVertex of this.adjacencyList[vertex]){
+        for (let adjacentVertex of this.adjacencyList[vertex]) {
             this.removeEdge(vertex, adjacentVertex)
         }
         delete this.adjacencyList[vertex]
@@ -67,28 +67,72 @@ class Graph {
         )
     }
 
+
     display() {
         for (let vertex in this.adjacencyList) {
             console.log(vertex + " -> " + [...this.adjacencyList[vertex]]);
 
         }
     }
+
+
+    bfs(startVertex){
+        const queue = [startVertex] // initialize the queue with the starting vertex
+        const visited = new Set() // to keep track of visited vertices
+
+        visited.add(startVertex) // mark the starting vertex as visited
+
+        const result = [] // to store the order of visited vertices
+
+        while(queue.length > 0){
+            const currentVertex = queue.shift() // remove the first vertex from the queue
+     
+            result.push(currentVertex) // add the current vertex to the result array
+
+            for(let neighbor of  this.adjacencyList[currentVertex]){ // iterate through the neighbors of the current vertex
+                if(!visited.has(neighbor)){ // if the neighbor has not been visited
+                    visited.add(neighbor) // mark the neighbor as visited
+                    queue.push(neighbor) // add the neighbor to the queue
+                }
+            }
+         
+         
+        }
+
+        return result
+    }
+
+   
 }
 
 
 
 const graph = new Graph()
+
 graph.addvertex("A")
 graph.addvertex("B")
 graph.addvertex("C")
+graph.addvertex("D")
+graph.addvertex("E")
+graph.addvertex("F")
+graph.addvertex("G")
 
 graph.addEdge("A", "B")
-graph.addEdge("B", "C")
+graph.addEdge("A", "C")
+graph.addEdge("B", "D")
+graph.addEdge("B", "E")
+graph.addEdge("C", "F")
+graph.addEdge("C", "G")
+
+// console.log(graph.bfs("A")) 
+
+
 
 
 graph.display()
+// console.log(graph.bfs("A"))
 
-console.log(graph.hasEdge("A", "C"));
+// console.log(graph.hasEdge("A", "C"));
 
-graph.removeVertex("B")
-graph.display()
+// graph.removeVertex("B")
+// graph.display()
