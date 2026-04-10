@@ -29,6 +29,8 @@ class MaxHeap {
             [this.heap[index], this.heap[parentIndex]] = [this.heap[parentIndex], this.heap[index]]; // swap
 
             // move up to parent index or position and check again
+
+            index = parentIndex
         }
     }
 
