@@ -20,7 +20,7 @@ const user = {
 let stret;
 if(user && user.profile && user.profile.address){
     street = user.profile.address.street;
-}
+}                                                           
 
 // new way - optional chaining
 const street = user?.profile?.address?.street; // "main st"
