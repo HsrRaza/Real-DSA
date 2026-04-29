@@ -367,7 +367,7 @@ Use:
 
 Use a visited set.
 
-Without visited:
+Without visited:System Design Interview" by Alex Xu (first chapters free online)
 
 ```text
 A -> B -> C -> A -> B -> C forever
