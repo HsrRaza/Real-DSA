@@ -9,28 +9,82 @@
 
 class TrieNode {
     constructor() {
-        this.children = Array(26).fill(null);
+        this.children = {};
 
         this.isEndOfWord = false;
     }
+}
 
 
-    insert(root, key) {
-        let curr = root;
+class Trie {
+    constructor() {
+        this.root = new TrieNode();
+    }
 
-        for (let c of key) {
-            let index = c.charCodeAt(0) - "a".charCodeAt(0);
+    insert(word) {
 
-            if (curr.children[index] === null) {
+        let node = this.root;
 
-                let newNode = new TrieNode();
-                curr.children[index] = newNode;
+        for (let char of word) {
+            if (!node.children[char]) {
+                node.children[char] = new TrieNode()
+            }
+            node = node.children[char]
+        }
+        node.isEndOfWord = true;
+
+    }
+
+
+    search(word){
+        let node = this.root;
+
+        for(let char of word){
+            if(!node.children[char]) {
+                return false
             }
 
-            curr =curr.children[index];
+            node = node.children[char]
         }
 
-        curr.isEndOfWord = true;
+
+        return node.isEndOfWord
     }
+
+//Prefix Search  Check:
+// startsWith("ca")
+// We only check path exists.
+// No need for isEnd.
+
+
+startWith(word){
+    let node  = this.root;
+
+    for(let char of word){
+        if(!node.children[char]){
+            return false
+        }
+
+        node = node.children[char];
+    }
+
+    return true
 }
+
+
+
+
+}
+
+
+const trie = new Trie()
+
+trie.insert("cat is my pet");
+// trie.insert("car")
+
+
+console.log(trie.search("cat"));
+// console.log(trie.startWith("ce"));
+
+
 
