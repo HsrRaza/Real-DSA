@@ -21,14 +21,14 @@ class LinkedList {
             this.head = newNode;
         } else {
 
-        let current = this.head;
+            let current = this.head;
 
-        while (current.next) {
-            current = current.next;
+            while (current.next) {
+                current = current.next;
+            }
+
+            current.next = newNode
         }
-
-        current.next = newNode
-    }
 
     }
 
@@ -83,13 +83,64 @@ class LinkedList {
 
         }
     }
+
+    reverse() {
+        let prev = null
+        let curr = this.head;
+
+        while (curr) {
+            let next = curr.next
+            curr.next = prev;
+            prev = curr;
+            curr = next
+
+        }
+       this.head = prev
+    }
+
+    middleNode() {
+        let curr = this.head;
+        let count;
+        while (curr) {
+            count++
+            curr = curr.next
+        }
+
+        let mid = Math.floor(count / 2) + 1
+        curr = this.head
+
+        while (curr) {
+
+            mid = mid - 1
+
+            if (mid === 0) {
+                break
+            }
+
+            curr = curr.next
+        }
+        return curr
+
+    }
 }
 
 const List = new LinkedList()
 List.append(1);
 List.append(3);
 List.append(5);
-List.insert(2,1)
+List.append(7);
+List.append(9);
+// List.insert(2,1)
 
 List.print()
+
+console.log("Reverse");
+List.reverse()
+List.print()
+
+List.middleNode()
+List.print()
+
+
+
 
