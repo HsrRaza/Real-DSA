@@ -100,7 +100,7 @@ class LinkedList {
 
     middleNode() {
         let curr = this.head;
-        let count;
+        let count = 0
         while (curr) {
             count++
             curr = curr.next
